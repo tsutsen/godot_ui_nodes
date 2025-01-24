@@ -32,7 +32,7 @@ var transforming : bool = false
 
 func _init() -> void:
 	set_anchors_preset(PRESET_FULL_RECT)
-	mouse_filter = MOUSE_FILTER_IGNORE
+	#mouse_filter = MOUSE_FILTER_STOP
 
 func _ready() -> void:
 	if parent is TextureRect:
@@ -66,6 +66,7 @@ func _create_handles_container():
 func _create_area_outline():
 	area_outline = ReferenceRect.new()
 	area_outline.set_anchors_preset(PRESET_FULL_RECT)
+	area_outline.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	area_outline.editor_only = false
 	#var new_material := ShaderMaterial.new()
 	#new_material.shader = load("res://addons/godot_ui_nodes/transforming.gdshader")
@@ -199,7 +200,7 @@ func _create_grabber(anchor_preset : LayoutPreset) -> Control:
 		grabber.position.x += grabber_size/2
 	if anchor_preset in [PRESET_LEFT_WIDE,PRESET_RIGHT_WIDE]:
 		grabber.position.y += grabber_size/2
-	grabber.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	grabber.mouse_filter = Control.MOUSE_FILTER_PASS
 	grabber.name = 'grabber'
 	return grabber
 
@@ -219,13 +220,13 @@ func _generate_handles() -> void:
 	
 	for anchor_preset in handle_anchors:
 		var new_handle = _create_handle(anchor_preset)
-		var grab_area = _create_grab_area(anchor_preset)
 		var grabber = _create_grabber(anchor_preset)
+		var grab_area = _create_grab_area(anchor_preset)
 		var grabber_outline = _create_grabber_outline()
 		
 		handles_container.add_child(new_handle)
-		new_handle.add_child(grab_area)	
 		new_handle.add_child(grabber)
+		new_handle.add_child(grab_area)
 		grabber.add_child(grabber_outline)
 		
 		assign_handle_category(grab_area,anchor_preset)
