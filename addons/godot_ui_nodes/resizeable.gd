@@ -127,7 +127,7 @@ func _resize() -> void:
 			return
 		parent.position.x = parent_pos.x + delta.x
 		parent.size.x = temp_size
-		set_font_size(temp_size)
+		#set_font_size(temp_size)
 
 	if active_handle in bottom:
 		temp_size = parent_size.y + delta.y
@@ -149,7 +149,7 @@ func _resize() -> void:
 				flipped_h = !flipped_h
 			return
 		parent.size.x = temp_size
-		set_font_size(temp_size)
+		#set_font_size(temp_size)
 
 
 func _init_gizmo() -> void:
