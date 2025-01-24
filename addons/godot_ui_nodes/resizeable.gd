@@ -37,6 +37,8 @@ func _init() -> void:
 func _ready() -> void:
 	if parent is TextureRect:
 		parent.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	if parent is Label:
+		parent.text_overrun_behavior = TextServer.OVERRUN_TRIM_CHAR
 
 	
 	if gizmo == null:
