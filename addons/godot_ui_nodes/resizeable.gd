@@ -86,7 +86,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func set_font_size(font_size : int):
 	if parent is Label:
-		var ratio : float = parent_size.y/font_size
+		var ratio : float = font_size/parent_size.y
 		parent.set('theme_override_font_sizes/font_size', font_size)
 		parent.size.x = parent_size.x*ratio
 
