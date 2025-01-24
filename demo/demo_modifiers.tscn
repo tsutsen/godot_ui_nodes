@@ -1,0 +1,103 @@
+[gd_scene load_steps=7 format=3 uid="uid://4fqqt674bvc4"]
+
+[ext_resource type="Texture2D" uid="uid://cdc3x5rtq7nx3" path="res://icon.svg" id="1_qiafk"]
+[ext_resource type="Script" path="res://addons/godot_ui_nodes/draggable.gd" id="2_gfi15"]
+[ext_resource type="Script" path="res://addons/godot_ui_nodes/resizeable.gd" id="3_82ssb"]
+
+[sub_resource type="Shader" id="Shader_0udxh"]
+code = "shader_type canvas_item;
+
+uniform float size : hint_range(1.0, 100.0) = 25.0;
+uniform vec4 color1 : source_color = vec4(1.0, 1.0, 1.0, 1.0); 
+uniform vec4 color2 : source_color = vec4(0.7, 0.7, 0.7, 1.0);
+
+void fragment() {
+    vec2 pos = floor(FRAGCOORD.xy / size);
+    float pattern_mask = mod(pos.x + mod(pos.y, 2.0), 2.0);
+    COLOR = mix(color1, color2, pattern_mask);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_55uw8"]
+shader = SubResource("Shader_0udxh")
+shader_parameter/size = 25.0
+shader_parameter/color1 = Color(1, 1, 1, 1)
+shader_parameter/color2 = Color(0.7, 0.7, 0.7, 1)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8et63"]
+
+[node name="DemoModifiers" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_55uw8")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_8et63")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 498.0
+offset_top = 228.0
+offset_right = 626.0
+offset_bottom = 356.0
+mouse_filter = 2
+texture = ExtResource("1_qiafk")
+
+[node name="Resizeable" type="Control" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_82ssb")
+
+[node name="Draggable" type="Control" parent="TextureRect"]
+z_index = 4
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("2_gfi15")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 211.0
+offset_top = 158.0
+offset_right = 359.0
+offset_bottom = 203.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Test label"
+
+[node name="Resizeable" type="Control" parent="Label"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_82ssb")
+
+[node name="Draggable" type="Control" parent="Label"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_gfi15")
