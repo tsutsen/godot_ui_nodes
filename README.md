@@ -8,7 +8,7 @@ You just need to add a modifer (Draggable or Resizable) as a child to a Control 
 # What's planned
 More modifiers, including:
 - `Croppable`
-- `Rotateable`
+- `Rotatable`
 - `Skewable`
 - `FreeTransform`
 - `Editable` (for labels)
