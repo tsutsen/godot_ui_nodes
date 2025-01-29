@@ -10,6 +10,7 @@ More modifiers:
 - [x] `Draggable` -- press down a key and move with mouse or controller
 - [x] `Resizable` -- press down a key and drag grabbers to resize parent
 - [x] `Hoverable` -- add multiple tweened hover effects
+- [x] `Focusable` -- add multiple tweened focus effects
 - [ ] `Croppable`
 - [ ] `Rotatable`
 - [ ] `Skewable`
